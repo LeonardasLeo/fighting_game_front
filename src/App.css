@@ -1,0 +1,176 @@
+.character, .characterSelected, .characterTaken {
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  padding: 10px;
+}
+.character img, .characterSelected img, .characterTaken img {
+  height: 100%;
+  width: 100%;
+}
+
+.character:hover, .characterSelected:hover {
+  opacity: 0.5;
+}
+
+.characterSelected {
+  background-color: green;
+}
+
+.characterTaken {
+  cursor: unset;
+}
+.characterTaken img {
+  opacity: 0.2;
+}
+
+.userList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.userCard {
+  background-color: #d0d0d0;
+  border-radius: 10px;
+  height: 100px;
+  display: flex;
+  padding: 10px;
+  gap: 10px;
+}
+.userCard img {
+  height: 100%;
+}
+
+.defaultGenerationDisplay {
+  height: 200px;
+}
+.defaultGenerationDisplay img {
+  height: 100%;
+}
+
+.backgroundSettings {
+  background-size: cover;
+  background-position: bottom;
+}
+
+.generatedItemsSlot {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  height: 200px;
+  border-radius: 10px;
+  flex: 1;
+  position: relative;
+  cursor: pointer;
+}
+.generatedItemsSlot img {
+  height: 70%;
+  object-fit: contain;
+}
+
+.itemInfoModal, .overflowingItemInfoModal {
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  min-width: 180px;
+  position: absolute;
+  left: 0;
+  z-index: 1;
+}
+
+.itemInfoModal {
+  top: 103%;
+  background-size: 1000px;
+  background-position: bottom;
+}
+
+.overflowingItemInfoModal {
+  bottom: 103%;
+  background-size: 1000px;
+  background-position: top;
+}
+
+.inventorySlot {
+  height: 100px;
+  width: 100px;
+  border-radius: 10px;
+  background-color: #dedede;
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+}
+.inventorySlot img {
+  height: 100%;
+}
+
+.selectedItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100px;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #dedede;
+  position: relative;
+  cursor: pointer;
+}
+.selectedItem img {
+  height: 100%;
+}
+
+.deleteFromInventoryButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: -10px;
+  right: -10px;
+  border-radius: 100%;
+}
+
+.invitationModal {
+  position: absolute;
+  top: 40%;
+  background-color: #c7c7c7;
+  padding: 20px;
+  z-index: 1;
+  left: 40%;
+  border-radius: 10px;
+}
+
+.invitationActive {
+  opacity: 0.5;
+}
+
+.battleSide > img {
+  height: 500px;
+  width: 100%;
+  object-fit: contain;
+}
+
+.bar {
+  width: 100%;
+  height: 50px;
+  background-color: gray;
+}
+
+.healthBar {
+  width: 100%;
+  height: 50px;
+  background-color: green;
+  z-index: 1;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+/*# sourceMappingURL=App.css.map */
