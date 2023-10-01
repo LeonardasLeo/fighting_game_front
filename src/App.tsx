@@ -21,8 +21,8 @@ import {
 } from "./features/otherStates";
 import {useDispatch} from "react-redux";
 import {store} from "./main.jsx";
-import {BattleCommunicationData, BattleUser, InvitationReceived, OnlineUser, UserType} from "./features/types";
 import config from "./config";
+import {DataTypes, UserTypes} from "./features/types";
 
 export const socket = io(`${config.serverRoute}`, {
     autoConnect: true
@@ -40,21 +40,21 @@ function App() {
         }else{
             nav('/login')
         }
-        socket.on('getUserData', (val: UserType) => {
+        socket.on('getUserData', (val: UserTypes.User) => {
             dispatch(updateUser(val))
         })
-        socket.on('getOnlineUsers', (val: OnlineUser[]) =>{
+        socket.on('getOnlineUsers', (val: UserTypes.OnlineUser[]) =>{
             dispatch(updateOnlineUsers(val))
         })
-        socket.on('invitationReceived', (val: InvitationReceived) => {
+        socket.on('invitationReceived', (val: DataTypes.InvitationReceived) => {
             dispatch(updateInvitationModal({state: true, data: val}))
         })
         socket.on('invitationAcceptedServer', ({roomName, first, second}) => {
             socket.emit('joinRoom', {roomName, id: socket.id})
             nav('/arena', {state: {roomName, first, second}})
         })
-        socket.on('getBattleUsers', ({first, second}: BattleCommunicationData) => {
-            const user:UserType = store.getState().users.myUser
+        socket.on('getBattleUsers', ({first, second}: DataTypes.BattleCommunicationData) => {
+            const user: UserTypes.User = store.getState().users.myUser
             if (first.username === user.username){
                 dispatch(updateBattleUserOne({...first, health: 100, gold: 0}))
                 dispatch(updateBattleUserTwo({...second, health: 100, gold: 0}))
@@ -63,8 +63,8 @@ function App() {
                 dispatch(updateBattleUserTwo({...first, health: 100, gold: 0}))
             }
         })
-        socket.on('attack', (val: BattleCommunicationData) => {
-            const user: UserType = store.getState().users.myUser
+        socket.on('attack', (val: DataTypes.BattleCommunicationData) => {
+            const user: UserTypes.User = store.getState().users.myUser
             if (val.first.username === user.username){
                 dispatch(updateBattleUserOne(val.first))
                 dispatch(updateBattleUserTwo(val.second))
@@ -73,15 +73,15 @@ function App() {
                 dispatch(updateBattleUserTwo(val.first))
             }
         })
-        socket.on('drinkPotion', (val: BattleUser) => {
-            const user: UserType = store.getState().users.myUser
+        socket.on('drinkPotion', (val: UserTypes.BattleUser) => {
+            const user: UserTypes.User = store.getState().users.myUser
             if (val.username === user.username){
                 dispatch(updateBattleUserOne(val))
             }else{
                 dispatch(updateBattleUserTwo(val))
             }
         })
-        socket.on('battleWon', (data: BattleCommunicationData) => {
+        socket.on('battleWon', (data: DataTypes.BattleCommunicationData) => {
             dispatch(updateBattleUserOne(data.first))
             dispatch(updateBattleUserTwo(data.second))
             dispatch(updateBattleWon({state: true, message: data.message}))
