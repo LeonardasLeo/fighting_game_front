@@ -15,6 +15,7 @@ import {
     updateRoomName
 } from "../features/otherStates";
 
+
 const ArenaPage = () => {
     const location = useLocation()
     const dispatch = useDispatch()
@@ -62,7 +63,7 @@ const ArenaPage = () => {
                                 {attacker === socket.id
                                     ?
                                     <div className='d-flex flex-column align-items-center'>
-                                        <button className='btn btn-warning btn-lg' onClick={attack}>Attack!</button>
+                                        <button className='btn btn-warning btn-lg' onClick={attack}>Attack ⚔️</button>
                                         <div className='mt-3'>You have {attackTime} secs left!</div>
                                     </div>
                                     :

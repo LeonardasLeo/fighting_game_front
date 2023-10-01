@@ -22,7 +22,7 @@ import {
     ReduxUsers, UserType
 } from "../features/types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCoins} from "@fortawesome/free-solid-svg-icons";
+import {faCoins, faTools} from "@fortawesome/free-solid-svg-icons";
 
 
 const MainPage = () => {
@@ -94,7 +94,7 @@ const MainPage = () => {
                                             : <GeneratedItemsSlot key={index} item={item as GameItem}/>
                                     )}
                                 </div>
-                                <button className='btn btn-warning btn-lg mt-3' onClick={generateItems}>Generate: 100$</button>
+                                <button className='btn btn-warning btn-lg mt-3' onClick={generateItems}>Generate: 100<FontAwesomeIcon icon={faCoins} color='black' /></button>
                             </div>
                             <div className='flex-1 mt-3'>
                                 <Inventory/>
