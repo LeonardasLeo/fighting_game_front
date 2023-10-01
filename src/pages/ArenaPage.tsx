@@ -2,21 +2,19 @@ import * as React from 'react';
 import {useEffect} from 'react';
 import {useLocation} from "react-router-dom";
 import {socket} from "../App.jsx";
-import Fighter from "../components/Fighter";
 import {useDispatch, useSelector} from "react-redux";
-import BattleWonDisplay from "../components/BattleWonDisplay";
-import UserLeftModal from "../components/modals/userLeftModal";
 import {
     updateAttackTime,
-
     updateBattleWon,
     updateHasUserLeft,
     updateRoomName
 } from "../features/otherStates";
+import {DataTypes, ReduxTypes, UserTypes} from "../features/types";
 import AttackDisplay from "../components/AttackDisplay";
 import WaitingDisplay from "../components/WaitingDisplay";
-import {DataTypes, ReduxTypes, UserTypes} from "../features/types";
-
+import BattleWonDisplay from "../components/BattleWonDisplay";
+import UserLeftModal from "../components/modals/userLeftModal";
+import Fighter from "../components/Fighter";
 
 const ArenaPage = () => {
     const location = useLocation()

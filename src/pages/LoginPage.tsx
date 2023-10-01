@@ -1,8 +1,9 @@
 import * as React from "react";
 import {useRef, useState} from 'react';
 import {NavigateFunction, useNavigate} from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import config from "../config";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const LoginPage = () => {
     const serverRoute: string = config.serverRoute
@@ -40,7 +41,7 @@ const LoginPage = () => {
     return (
         <div className='p-3'>
             <div>
-                <button className='btn btn-dark' onClick={() => nav('/')}>Register</button>
+                <button className='btn btn-secondary' onClick={() => nav('/')}>Register</button>
             </div>
             <div className='d-flex flex-column gap-2 p-5'>
                 <input type="text" placeholder='Username' ref={usernameRef}/>

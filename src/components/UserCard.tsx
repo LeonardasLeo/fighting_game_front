@@ -1,9 +1,10 @@
 import * as React from 'react';
-import '../App.css'
 import {socket} from "../App.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {updateError} from '../features/error';
 import {ReduxTypes, UserTypes} from "../features/types";
+import '../App.css'
+
 
 const UserCard = ({user}: {user: UserTypes.OnlineUser}) => {
     const dispatch = useDispatch()

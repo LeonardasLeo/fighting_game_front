@@ -1,12 +1,13 @@
 import * as React from "react";
 import {useState} from 'react';
-import '../App.css'
 import MoreItemInfoModal from "./modals/MoreItemInfoModal";
 import {useDispatch} from "react-redux";
 import {updateUser} from "../features/users";
 import {updateError} from "../features/error";
-import config from "../config";
 import {GameTypes} from "../features/types";
+import config from "../config";
+import '../App.css'
+
 
 const GeneratedItemsSlot = ({item}: {item: GameTypes.GameItem}) => {
     const serverRoute = config.serverRoute

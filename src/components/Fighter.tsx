@@ -1,8 +1,9 @@
 import * as React from 'react';
-import SelectedItem from "./selectedItem";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCoins} from "@fortawesome/free-solid-svg-icons";
 import {GameTypes, UserTypes} from "../features/types";
+import SelectedItem from "./selectedItem";
+
 
 const Fighter = ({user} : {user: UserTypes.BattleUser}) => {
     return (

@@ -4,20 +4,19 @@ import {useDispatch, useSelector} from "react-redux";
 import {updateBattleWon, updateHasUserLeft} from "../features/otherStates";
 import {updateUser} from "../features/users";
 import {updateError} from "../features/error";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {socket} from "../App.jsx";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCoins} from "@fortawesome/free-solid-svg-icons";
+import {GameTypes, ReduxTypes, UserTypes} from "../features/types";
+import config from "../config";
 import UserCard from "../components/UserCard.jsx";
 import GeneratedItemsSlot from "../components/GeneratedItemsSlot.jsx";
 import Inventory from "../components/Inventory.jsx";
-import {socket} from "../App.jsx";
 import DefaultGenerationDisplay from "../components/DefaultGenerationDisplay.jsx";
 import InvitationModal from "../components/modals/InvitationModal.jsx";
-import config from "../config";
-import '../App.css'
-import {GameTypes, ReduxTypes, UserTypes} from "../features/types";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCoins} from "@fortawesome/free-solid-svg-icons";
 import Navbar from "../components/Navbar";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../App.css'
 
 
 const MainPage = () => {

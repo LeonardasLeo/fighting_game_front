@@ -1,9 +1,9 @@
 import * as React from 'react';
-import '../../App.css'
+import {GameTypes} from "../../features/types";
 import WeaponModal from "./WeaponModal";
 import ArmourModal from "./ArmourModal";
 import PotionModal from "./PotionModal";
-import {GameTypes} from "../../features/types";
+import '../../App.css'
 
 const MoreItemInfoModal = ({item}: {item: GameTypes.GameItem}) => {
     return (

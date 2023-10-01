@@ -1,10 +1,11 @@
 import * as React from "react";
 import {useState} from 'react';
-import '../App.css'
-import MoreItemInfoModal from "./modals/MoreItemInfoModal";
 import {useSelector} from "react-redux";
 import {socket} from "../App";
 import {GameTypes, ReduxTypes, UserTypes} from "../features/types";
+import MoreItemInfoModal from "./modals/MoreItemInfoModal";
+import '../App.css'
+
 const SelectedItem = ({item}: {item: GameTypes.GameItem}) => {
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
     const user: UserTypes.BattleUser = useSelector((state: ReduxTypes.ReduxUsers) => state.users.userInBattleOne)

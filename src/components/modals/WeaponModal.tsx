@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useRef} from "react";
-import useOverflowCheck from "../../hooks/useOverflowCheck";
 import {GameTypes} from "../../features/types";
+import useOverflowCheck from "../../hooks/useOverflowCheck";
 
 const WeaponModal = ({item}: {item: GameTypes.GameItem}) => {
     const ref: React.MutableRefObject<HTMLDivElement> = useRef()

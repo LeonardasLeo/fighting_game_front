@@ -1,11 +1,9 @@
-// @ts-ignore
 import * as React from "react";
 import {useEffect, useRef, useState} from 'react';
 import {NavigateFunction, useNavigate} from "react-router-dom";
-import '../App.css'
-import CharacterSelect from "../components/CharacterSelect.jsx";
 import {GameTypes} from "../features/types";
 import config from '../config'
+import CharacterSelect from "../components/CharacterSelect.jsx";
 const RegisterPage = () => {
     const serverRoute: string = config.serverRoute
     const nav: NavigateFunction = useNavigate()

@@ -1,11 +1,10 @@
-import './App.scss'
-import RegisterPage from "./pages/RegisterPage.jsx";
 import {BrowserRouter, Route, Routes, useNavigate} from "react-router-dom";
-import LoginPage from "./pages/LoginPage.jsx";
-import MainPage from "./pages/MainPage.jsx";
+import {useDispatch} from "react-redux";
 import {useEffect, useState} from "react";
+import {DataTypes, UserTypes} from "./features/types";
 import { io } from 'socket.io-client';
-import ArenaPage from "./pages/ArenaPage.jsx";
+import {store} from "./main.jsx";
+import config from "./config";
 import {
     updateOnlineUsers,
     updateUser,
@@ -19,11 +18,10 @@ import {
     updateAttacker,
     updateAttackTime
 } from "./features/otherStates";
-import {useDispatch} from "react-redux";
-import {store} from "./main.jsx";
-import config from "./config";
-import {DataTypes, UserTypes} from "./features/types";
-
+import ArenaPage from "./pages/ArenaPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import MainPage from "./pages/MainPage.jsx";
+import RegisterPage from "./pages/RegisterPage.jsx";
 export const socket = io(`${config.serverRoute}`, {
     autoConnect: true
 })

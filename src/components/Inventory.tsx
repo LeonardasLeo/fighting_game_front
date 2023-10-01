@@ -1,9 +1,10 @@
 import * as React from 'react';
 import {useSelector} from "react-redux";
-import '../App.css'
 import SelectedItem from "./selectedItem";
 import InventorySlot from "./inventorySlot";
 import {GameTypes, ReduxTypes, UserTypes} from "../features/types";
+import '../App.css'
+
 const Inventory = () => {
     const user: UserTypes.User = useSelector((state: ReduxTypes.ReduxUsers) => state.users.myUser)
     return (

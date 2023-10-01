@@ -4,8 +4,8 @@ import MoreItemInfoModal from "./modals/MoreItemInfoModal";
 import {useDispatch} from "react-redux";
 import {updateUser} from "../features/users";
 import {updateError} from "../features/error";
-import config from "../config";
 import {GameTypes} from "../features/types";
+import config from "../config";
 
 const InventorySlot = ({item} : {item: GameTypes.GameItem}) => {
     const serverRoute: string = config.serverRoute
