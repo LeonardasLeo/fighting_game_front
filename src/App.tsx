@@ -3,7 +3,7 @@ import RegisterPage from "./pages/RegisterPage.jsx";
 import {BrowserRouter, Route, Routes, useNavigate} from "react-router-dom";
 import LoginPage from "./pages/LoginPage.jsx";
 import MainPage from "./pages/MainPage.jsx";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import { io } from 'socket.io-client';
 import ArenaPage from "./pages/ArenaPage.jsx";
 import {
@@ -24,12 +24,14 @@ function App() {
     const dispatch = useDispatch()
     const nav = useNavigate()
     const isJwtToken = localStorage.getItem('token')|| sessionStorage.getItem('token')
+    const [isError, setIsError] = useState<boolean>(false)
+    const [error, setError] = useState<string>('')
 
     useEffect(() => {
         if (isJwtToken){
             nav('/main')
         }else{
-            nav('/login')
+            return nav('/login')
         }
         socket.on('getUserData', (val: UserType) => {
             dispatch(updateUser(val))
@@ -75,16 +77,27 @@ function App() {
         socket.on('pageWasReloaded', (val: string) => {
             dispatch(updateHasUserLeft({state: true, message: val}))
         })
+        socket.on('error', (val: string) => {
+            setIsError(true)
+            console.log('asdas')
+            setError(val)
+        })
     }, [])
 
     return (
         <>
-            <Routes>
-                <Route path='/' element={<RegisterPage/>}/>
-                <Route path='/login' element={<LoginPage/>}/>
-                <Route path='/main' element={<MainPage/>}/>
-                <Route path='/arena' element={<ArenaPage/>}/>
-            </Routes>
+            {isError
+                ?
+                <div className='p-3'>{error}</div>
+                :
+                <Routes>
+                    <Route path='/' element={<RegisterPage/>}/>
+                    <Route path='/login' element={<LoginPage/>}/>
+                    <Route path='/main' element={<MainPage/>}/>
+                    <Route path='/arena' element={<ArenaPage/>}/>
+                </Routes>
+            }
+
         </>
     )
 }

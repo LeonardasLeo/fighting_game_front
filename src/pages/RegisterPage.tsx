@@ -12,6 +12,7 @@ const RegisterPage = () => {
     const passwordTwo:React.MutableRefObject<HTMLInputElement> = useRef()
     const [character, setCharacter] = useState<string>('')
     const [characters, setCharacters] = useState<Character[]>([])
+    const [error, setError] = useState<string>('')
     useEffect(() => {
         fetch('http://192.168.1.147:3001/getCharacters')
             .then(res => res.json())
@@ -34,7 +35,7 @@ const RegisterPage = () => {
         const response = await fetch('http://192.168.1.147:3001/register', options)
         const data = await response.json()
         if (!data.error) nav('/login')
-        else console.log(data)
+        else setError(data.message)
     }
 
     return (
@@ -44,13 +45,14 @@ const RegisterPage = () => {
             </div>
             <div className='d-flex flex-column gap-1 p-5'>
                 <div className='d-flex flex-wrap gap-3'>
-                    {characters.map(item => <CharacterSelect key={item.image} character={character} setCharacter={setCharacter} item={item}/>)}
+                    {characters.map((item: Character) => <CharacterSelect key={item.image} character={character} setCharacter={setCharacter} item={item}/>)}
                 </div>
                 <div className='d-flex flex-column gap-2 mt-3'>
                     <input type="text" placeholder='Username' ref={usernameRef}/>
                     <input type="text" placeholder='Password' ref={password}/>
                     <input type="text" placeholder='Repeat password' ref={passwordTwo}/>
                     <button className='btn btn-primary' onClick={register}>Register</button>
+                    <div style={{color: 'red'}}><b>{error}</b></div>
                 </div>
             </div>
         </div>

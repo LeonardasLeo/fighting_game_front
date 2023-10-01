@@ -7,8 +7,8 @@ const LoginPage = () => {
     const nav = useNavigate()
     const usernameRef:React.MutableRefObject<HTMLInputElement>= useRef()
     const passwordRef:React.MutableRefObject<HTMLInputElement>= useRef()
-    const [autoLogin, setAutoLogin] = useState(false)
-
+    const [autoLogin, setAutoLogin] = useState<boolean>(false)
+    const [error, setError] = useState<string>('')
     async function login () {
         const user = {
             username: usernameRef.current.value,
@@ -32,7 +32,7 @@ const LoginPage = () => {
                 sessionStorage.setItem('token', data.data.token)
             }
         }else{
-            console.log(data.message)
+            setError(data.message)
         }
     }
     return (
@@ -47,6 +47,7 @@ const LoginPage = () => {
                     <input type="checkbox" onChange={() => setAutoLogin(!autoLogin)}/> Keep me logged in
                 </div>
                 <button className='btn btn-primary' onClick={login}>Login</button>
+                <div style={{color: 'red'}}><b>{error}</b></div>
             </div>
         </div>
     );

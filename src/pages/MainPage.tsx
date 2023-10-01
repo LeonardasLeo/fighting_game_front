@@ -73,7 +73,12 @@ const MainPage = () => {
                     <nav className='d-flex justify-content-between align-items-center'>
                         <div><b>Money:</b> {user.money}$</div>
                         <div className='fs-3' style={{color: 'red'}}><b>{error}</b></div>
-                        <button className='btn btn-dark' onClick={logout}>Logout</button>
+                        <div className='d-flex align-items-center gap-3'>
+                            <div>
+                                <b>Logged in as:</b> {user.username}
+                            </div>
+                            <button className='btn btn-dark' onClick={logout}>Log out</button>
+                        </div>
                     </nav>
                     <div className='d-flex gap-3 mt-3'>
                         <div className='d-flex flex-column flex-1'>
