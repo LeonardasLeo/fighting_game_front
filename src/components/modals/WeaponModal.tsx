@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {useRef} from "react";
-import useOverflowCheck from "../../hooks/useOverflowCheck.js";
-import {EffectType, GameItem} from "../../features/types";
+import useOverflowCheck from "../../hooks/useOverflowCheck";
+import {GameTypes} from "../../features/types";
 
-const WeaponModal = ({item}: {item: GameItem}) => {
+const WeaponModal = ({item}: {item: GameTypes.GameItem}) => {
     const ref: React.MutableRefObject<HTMLDivElement> = useRef()
     const isOverflowing: boolean = useOverflowCheck(ref)
 
@@ -19,7 +19,7 @@ const WeaponModal = ({item}: {item: GameItem}) => {
             </div>
             <div><b>Effects</b>:
                 <div className='d-flex flex-column gap-2 px-2 py-1'>
-                    {item.effects.map((effect: EffectType, index: number) =>
+                    {item.effects.map((effect: GameTypes.EffectType, index: number) =>
                         <div key={index} style={{fontSize: '13px'}}>
                             <b>Name:</b> {effect.name} <br/>
                             <b>Probability</b>: {effect.probability}%

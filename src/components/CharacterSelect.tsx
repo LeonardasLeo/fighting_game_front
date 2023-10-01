@@ -1,13 +1,13 @@
 import * as React from 'react';
-import {Character} from "../features/types";
+import {GameTypes} from "../features/types";
 
 type props = {
-    item: Character,
+    item: GameTypes.Character,
     character: string,
     setCharacter: React.Dispatch<React.SetStateAction<string>>
 }
 
-const CharacterSelect = ({item, character,setCharacter}: props) => {
+const CharacterSelect = ({item, character, setCharacter}: props) => {
     function checkIsCharacterTaken (item){
         if (item.isTaken) return 'characterTaken'
         if (character === item.image && !item.isTaken) return 'characterSelected'

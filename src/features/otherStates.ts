@@ -1,20 +1,20 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {CriticalCaseEvent, InvitationData} from "./types.ts";
+import {DataTypes} from "./types.ts";
 
-const falseState:InvitationData = {
+const falseState: DataTypes.InvitationData = {
     state: false,
     data: undefined
 }
 
-const falseCriticalEvent: CriticalCaseEvent = {
+const falseCriticalEvent: DataTypes.CriticalCaseEvent = {
     state: false,
     message: undefined
 }
 
 type OtherState = {
-    invitationModal?: InvitationData;
-    isBattleWon?: CriticalCaseEvent;
-    hasUserLeft?: CriticalCaseEvent;
+    invitationModal?: DataTypes.InvitationData;
+    isBattleWon?: DataTypes.CriticalCaseEvent;
+    hasUserLeft?: DataTypes.CriticalCaseEvent;
     roomName?: string,
     attacker?: string,
     attackTime?: number
@@ -33,13 +33,13 @@ const otherStatesSlice = createSlice({
     name: 'otherStatesSlice',
     initialState,
     reducers: {
-        updateInvitationModal: (state, action: PayloadAction<InvitationData>) => {
+        updateInvitationModal: (state, action: PayloadAction<DataTypes.InvitationData>) => {
             state.invitationModal = action.payload
         },
-        updateBattleWon: (state, action: PayloadAction<CriticalCaseEvent>) => {
+        updateBattleWon: (state, action: PayloadAction<DataTypes.CriticalCaseEvent>) => {
             state.isBattleWon = action.payload
         },
-        updateHasUserLeft: (state, action: PayloadAction<CriticalCaseEvent>) => {
+        updateHasUserLeft: (state, action: PayloadAction<DataTypes.CriticalCaseEvent>) => {
             state.hasUserLeft = action.payload
         },
         updateRoomName: (state, action: PayloadAction<string>) => {

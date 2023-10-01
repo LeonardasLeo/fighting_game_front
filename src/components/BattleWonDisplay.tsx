@@ -1,16 +1,16 @@
 import * as React from 'react';
-import {useNavigate} from "react-router-dom";
-import {BattleUser, CriticalCaseEvent} from "../features/types";
+import {NavigateFunction, useNavigate} from "react-router-dom";
 import {faCoins} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {DataTypes, UserTypes} from "../features/types";
 
 type props = {
-    isBattleWon: CriticalCaseEvent,
-    firstUser: BattleUser
+    isBattleWon: DataTypes.CriticalCaseEvent,
+    firstUser: UserTypes.BattleUser
 }
 
 const BattleWonDisplay = ({isBattleWon, firstUser}: props) => {
-    const nav = useNavigate()
+    const nav: NavigateFunction = useNavigate()
     function goBack () {
         nav('/main')
     }

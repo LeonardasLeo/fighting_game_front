@@ -1,14 +1,14 @@
-// @ts-ignore
-import React, {useState} from 'react';
+import * as React from "react";
+import {useState} from 'react';
 import '../App.css'
 import MoreItemInfoModal from "./modals/MoreItemInfoModal";
-import {BattleUser, GameItem, ReduxOtherStates, ReduxUsers} from "../features/types";
 import {useSelector} from "react-redux";
 import {socket} from "../App";
-const SelectedItem = ({item}: {item: GameItem}) => {
+import {GameTypes, ReduxTypes, UserTypes} from "../features/types";
+const SelectedItem = ({item}: {item: GameTypes.GameItem}) => {
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
-    const user: BattleUser = useSelector((state: ReduxUsers) => state.users.userInBattleOne)
-    const roomName: string = useSelector((state: ReduxOtherStates) => state.otherStates.roomName)
+    const user: UserTypes.BattleUser = useSelector((state: ReduxTypes.ReduxUsers) => state.users.userInBattleOne)
+    const roomName: string = useSelector((state: ReduxTypes.ReduxOtherStates) => state.otherStates.roomName)
     function drinkPotion () {
         if (item.hp && user){
             socket.emit('requestPotionDrink', {user: user, item, roomName})

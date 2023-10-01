@@ -1,10 +1,10 @@
 import * as React from 'react';
 import SelectedItem from "./selectedItem";
-import {BattleUser, GameItem} from "../features/types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCoins} from "@fortawesome/free-solid-svg-icons";
+import {GameTypes, UserTypes} from "../features/types";
 
-const Fighter = ({user} : {user: BattleUser}) => {
+const Fighter = ({user} : {user: UserTypes.BattleUser}) => {
     return (
         <div className='flex-1 battleSide'>
             <div className='fs-4'>{user.gold} <FontAwesomeIcon icon={faCoins} color='#DAA451FF' /></div>
@@ -14,7 +14,7 @@ const Fighter = ({user} : {user: BattleUser}) => {
             </div>
             <div className='battleMessage'>{user.message}</div>
             <div className='d-flex justify-content-evenly mt-3'>
-                {user.selectedItems.map((item: GameItem) =>
+                {user.selectedItems.map((item: GameTypes.GameItem) =>
                     <SelectedItem key={item.type} item={item}/>
                 )}
             </div>

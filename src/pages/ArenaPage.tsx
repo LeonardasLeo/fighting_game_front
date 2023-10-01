@@ -6,7 +6,6 @@ import Fighter from "../components/Fighter";
 import {useDispatch, useSelector} from "react-redux";
 import BattleWonDisplay from "../components/BattleWonDisplay";
 import UserLeftModal from "../components/modals/userLeftModal";
-import {ReduxUsers, ReduxOtherStates, UserType, BattleUser, CriticalCaseEvent} from "../features/types";
 import {
     updateAttackTime,
 
@@ -14,35 +13,34 @@ import {
     updateHasUserLeft,
     updateRoomName
 } from "../features/otherStates";
+import AttackDisplay from "../components/AttackDisplay";
+import WaitingDisplay from "../components/WaitingDisplay";
+import {DataTypes, ReduxTypes, UserTypes} from "../features/types";
 
 
 const ArenaPage = () => {
     const location = useLocation()
     const dispatch = useDispatch()
     const {roomName, first, second} = location.state
-    const user: UserType = useSelector((state: ReduxUsers) => state.users.myUser)
-    const firstUser: BattleUser = useSelector((state: ReduxUsers) => state.users.userInBattleOne)
-    const secondUser: BattleUser = useSelector((state: ReduxUsers) => state.users.userInBattleTwo)
-    const isBattleWon: CriticalCaseEvent = useSelector((state: ReduxOtherStates) => state.otherStates.isBattleWon)
-    const hasUserLeft: CriticalCaseEvent = useSelector((state: ReduxOtherStates) => state.otherStates.hasUserLeft)
-    const attacker: string = useSelector((state: ReduxOtherStates) => state.otherStates.attacker)
-    const attackTime: number = useSelector((state: ReduxOtherStates) => state.otherStates.attackTime)
+    const user: UserTypes.User = useSelector((state: ReduxTypes.ReduxUsers) => state.users.myUser)
+    const firstUser: UserTypes.BattleUser = useSelector((state: ReduxTypes.ReduxUsers) => state.users.userInBattleOne)
+    const secondUser: UserTypes.BattleUser = useSelector((state: ReduxTypes.ReduxUsers) => state.users.userInBattleTwo)
+    const isBattleWon: DataTypes.CriticalCaseEvent = useSelector((state: ReduxTypes.ReduxOtherStates) => state.otherStates.isBattleWon)
+    const hasUserLeft: DataTypes.CriticalCaseEvent = useSelector((state: ReduxTypes.ReduxOtherStates) => state.otherStates.hasUserLeft)
+    const attacker: string = useSelector((state: ReduxTypes.ReduxOtherStates) => state.otherStates.attacker)
     //this doesnt work on FireFox
     window.onbeforeunload = pageLeft
     window.onpopstate = pageLeft
 
     useEffect(() => {
         socket.emit('requestBattleUsers', {roomName, userOne: first, userTwo: second})
-        dispatch(updateRoomName(roomName))
         socket.emit('setWhoIsAttacking', {roomName, first, second, attacker})
+        dispatch(updateRoomName(roomName))
         dispatch(updateHasUserLeft({state: false, message: null}))
         dispatch(updateBattleWon({state: false, message: null}))
     },[])
 
-    function attack () {
-        socket.emit('setWhoIsAttacking', {roomName, first, second, attacker})
-        socket.emit('requestAttack', {roomName, firstUser, secondUser})
-    }
+
 
     function pageLeft() {
         socket.emit('pageLeft', {roomName, firstUser, secondUser})
@@ -61,16 +59,8 @@ const ArenaPage = () => {
                             :
                             <div className='d-flex align-items-center'>
                                 {attacker === socket.id
-                                    ?
-                                    <div className='d-flex flex-column align-items-center'>
-                                        <button className='btn btn-warning btn-lg' onClick={attack}>Attack ⚔️</button>
-                                        <div className='mt-3'>You have {attackTime} secs left!</div>
-                                    </div>
-                                    :
-                                    <div className='d-flex flex-column align-items-center'>
-                                        <div><b>Waiting for opponent to attack</b></div>
-                                        <div>{attackTime}</div>
-                                    </div>
+                                    ? <AttackDisplay roomName={roomName} first={first} second={second} attacker={attacker}/>
+                                    : <WaitingDisplay/>
                                 }
                             </div>
                         }

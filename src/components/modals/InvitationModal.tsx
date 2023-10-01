@@ -1,15 +1,14 @@
-// @ts-ignore
-import React from 'react';
+import * as React from 'react';
 import {socket} from "../../App.jsx";
 import {updateInvitationModal} from "../../features/otherStates";
-import {useNavigate} from "react-router-dom";
+import {NavigateFunction, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {InvitationReceived} from "../../features/types";
+import {DataTypes, UserTypes} from "../../features/types";
 
-const InvitationModal = ({data}: {data: InvitationReceived}) => {
+const InvitationModal = ({data}: {data: DataTypes.InvitationReceived}) => {
     const dispatch = useDispatch()
-    const nav = useNavigate()
-    const userWhoSent = data.from
+    const nav: NavigateFunction = useNavigate()
+    const userWhoSent: UserTypes.OnlineUser = data.from
     const turnModalOff = () => {
         dispatch(updateInvitationModal({state: false, data: undefined}))
     }

@@ -1,14 +1,14 @@
-// @ts-ignore
-import React, {useState} from 'react';
+import * as React from "react";
+import {useState} from 'react';
 import '../App.css'
 import MoreItemInfoModal from "./modals/MoreItemInfoModal";
 import {useDispatch} from "react-redux";
 import {updateUser} from "../features/users";
 import {updateError} from "../features/error";
-import {GameItem} from "../features/types";
 import config from "../config";
+import {GameTypes} from "../features/types";
 
-const GeneratedItemsSlot = ({item}: {item: GameItem}) => {
+const GeneratedItemsSlot = ({item}: {item: GameTypes.GameItem}) => {
     const serverRoute = config.serverRoute
     const dispatch = useDispatch()
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false)

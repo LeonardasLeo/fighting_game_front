@@ -1,12 +1,12 @@
 import * as React from "react";
 import {useRef, useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import {NavigateFunction, useNavigate} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import config from "../config";
 
 const LoginPage = () => {
-    const serverRoute = config.serverRoute
-    const nav = useNavigate()
+    const serverRoute: string = config.serverRoute
+    const nav: NavigateFunction = useNavigate()
     const usernameRef:React.MutableRefObject<HTMLInputElement>= useRef()
     const passwordRef:React.MutableRefObject<HTMLInputElement>= useRef()
     const [autoLogin, setAutoLogin] = useState<boolean>(false)

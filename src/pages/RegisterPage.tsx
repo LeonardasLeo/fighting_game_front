@@ -1,19 +1,19 @@
 // @ts-ignore
 import * as React from "react";
 import {useEffect, useRef, useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import {NavigateFunction, useNavigate} from "react-router-dom";
 import '../App.css'
 import CharacterSelect from "../components/CharacterSelect.jsx";
-import {Character} from "../features/types";
+import {GameTypes} from "../features/types";
 import config from '../config'
 const RegisterPage = () => {
-    const serverRoute = config.serverRoute
-    const nav = useNavigate()
+    const serverRoute: string = config.serverRoute
+    const nav: NavigateFunction = useNavigate()
     const usernameRef:React.MutableRefObject<HTMLInputElement> = useRef()
     const password:React.MutableRefObject<HTMLInputElement> = useRef()
     const passwordTwo:React.MutableRefObject<HTMLInputElement> = useRef()
     const [character, setCharacter] = useState<string>('')
-    const [characters, setCharacters] = useState<Character[]>([])
+    const [characters, setCharacters] = useState<GameTypes.Character[]>([])
     const [error, setError] = useState<string>('')
     useEffect(() => {
         fetch(`${serverRoute}/getCharacters`)
@@ -47,7 +47,7 @@ const RegisterPage = () => {
             </div>
             <div className='d-flex flex-column gap-1 p-5'>
                 <div className='d-flex flex-wrap gap-3'>
-                    {characters.map((item: Character) => <CharacterSelect key={item.image} character={character} setCharacter={setCharacter} item={item}/>)}
+                    {characters.map((item: GameTypes.Character) => <CharacterSelect key={item.image} character={character} setCharacter={setCharacter} item={item}/>)}
                 </div>
                 <div className='d-flex flex-column gap-2 mt-3'>
                     <input type="text" placeholder='Username' ref={usernameRef}/>

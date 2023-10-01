@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {DefaultGeneration} from "../features/types";
+import {GameTypes} from "../features/types";
 
-const DefaultGenerationDisplay = ({item}: {item: DefaultGeneration}) => {
+const DefaultGenerationDisplay = ({item}: {item: GameTypes.DefaultGeneration}) => {
     return (
         <div className='defaultGenerationDisplay'>
             <img src={item.image} alt=""/>
