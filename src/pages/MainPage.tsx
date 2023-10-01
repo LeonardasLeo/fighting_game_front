@@ -86,8 +86,8 @@ const MainPage = () => {
                                 <div className='d-flex justify-content-between gap-3'>
                                     {generatedItems.map((item: GameItem | DefaultGeneration, index) =>
                                         item.type === 'default'
-                                            ? <DefaultGenerationDisplay key={index} item={item}/>
-                                            : <GeneratedItemsSlot key={index} item={item}/>
+                                            ? <DefaultGenerationDisplay key={index} item={item as DefaultGeneration}/>
+                                            : <GeneratedItemsSlot key={index} item={item as GameItem}/>
                                     )}
                                 </div>
                                 <button className='btn btn-warning btn-lg mt-3' onClick={generateItems}>Generate: 100$</button>

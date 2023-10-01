@@ -31,7 +31,7 @@ function App() {
         if (isJwtToken){
             nav('/main')
         }else{
-            return nav('/login')
+            nav('/login')
         }
         socket.on('getUserData', (val: UserType) => {
             dispatch(updateUser(val))
@@ -79,7 +79,6 @@ function App() {
         })
         socket.on('error', (val: string) => {
             setIsError(true)
-            console.log('asdas')
             setError(val)
         })
     }, [])
