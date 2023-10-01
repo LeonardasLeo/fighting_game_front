@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import BattleWonDisplay from "../components/BattleWonDisplay";
 import UserLeftModal from "../components/modals/userLeftModal";
 import {ReduxUsers, ReduxOtherStates, UserType, BattleUser, CriticalCaseEvent} from "../features/types";
-import {updateRoomName} from "../features/otherStates";
+import {updateAttacker, updateRoomName} from "../features/otherStates";
 
 const ArenaPage = () => {
     const location = useLocation()
@@ -18,6 +18,7 @@ const ArenaPage = () => {
     const secondUser: BattleUser = useSelector((state: ReduxUsers) => state.users.userInBattleTwo)
     const isBattleWon: CriticalCaseEvent = useSelector((state: ReduxOtherStates) => state.otherStates.isBattleWon)
     const hasUserLeft: CriticalCaseEvent = useSelector((state: ReduxOtherStates) => state.otherStates.hasUserLeft)
+    const attacker: string = useSelector((state: ReduxOtherStates) => state.otherStates.attacker)
     //this doesnt work on FireFox
     window.onbeforeunload = pageLeft
     window.onpopstate = pageLeft
@@ -25,14 +26,22 @@ const ArenaPage = () => {
     useEffect(() => {
         socket.emit('requestBattleUsers', {roomName, userOne: first, userTwo: second})
         dispatch(updateRoomName(roomName))
+        dispatch(updateAttacker(first))
+        socket.emit('setWhoIsAttacking', {roomName, first, second, attacker})
+
+        // setInterval(() => {
+        //     socket.emit('setWhoIsAttacking', {roomName, first, second, attacker})
+        // }, 20000)
     },[])
 
     function attack () {
+        socket.emit('setWhoIsAttacking', {roomName, first, second, attacker})
         socket.emit('requestAttack', {roomName, firstUser, secondUser})
+        console.log(attacker)
     }
 
     function pageLeft() {
-        socket.emit('pageReloaded', {roomName, firstUser, secondUser})
+        socket.emit('pageLeft', {roomName, firstUser, secondUser})
     }
 
     return (
@@ -46,7 +55,7 @@ const ArenaPage = () => {
                             <BattleWonDisplay isBattleWon={isBattleWon} firstUser={firstUser}/>
                             :
                             <div className='d-flex align-items-center'>
-                                <button className='btn btn-warning' onClick={attack}>Attack</button>
+                                {attacker === socket.id ? <button className='btn btn-warning' onClick={attack}>Attack</button> : <div>enemy turn</div>}
                             </div>
                         }
                         {firstUser.username === user.username ? <Fighter user={secondUser}/> : <Fighter user={firstUser}/>}

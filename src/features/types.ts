@@ -94,7 +94,8 @@ export type ReduxOtherStates = {
         invitationModal: {state: boolean, data: InvitationReceived},
         isBattleWon: {state: boolean, message: string},
         hasUserLeft: {state: boolean, message: string},
-        roomName: string
+        roomName: string,
+        attacker: string
     }
 }
 

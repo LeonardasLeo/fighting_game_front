@@ -15,14 +15,16 @@ type OtherState = {
     invitationModal?: InvitationData;
     isBattleWon?: CriticalCaseEvent;
     hasUserLeft?: CriticalCaseEvent;
-    roomName?: string
+    roomName?: string,
+    attacker?: string
 }
 
 const initialState: OtherState = {
     invitationModal: falseState,
     isBattleWon: falseCriticalEvent,
     hasUserLeft: falseCriticalEvent,
-    roomName: ''
+    roomName: '',
+    attacker: ''
 } 
 
 const otherStatesSlice = createSlice({
@@ -40,6 +42,9 @@ const otherStatesSlice = createSlice({
         },
         updateRoomName: (state, action: PayloadAction<string>) => {
             state.roomName = action.payload
+        },
+        updateAttacker: (state, action: PayloadAction<string>) => {
+            state.attacker = action.payload
         }
     }
 })
@@ -48,7 +53,8 @@ export const {
     updateInvitationModal,
     updateBattleWon,
     updateHasUserLeft,
-    updateRoomName
+    updateRoomName,
+    updateAttacker
 } = otherStatesSlice.actions
 
 export default otherStatesSlice.reducer
