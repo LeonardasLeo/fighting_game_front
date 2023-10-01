@@ -1,9 +1,10 @@
 .character, .characterSelected, .characterTaken{
-    border: 2px solid black;
+    border: 2px ridge;
     border-radius: 10px;
     width: 200px;
     height: 200px;
     cursor: pointer;
+    background-color: rgba(255,255,255,0.2);
     padding: 10px;
     img{
         height: 100%;
@@ -11,12 +12,18 @@
     }
 }
 
+input{
+    background-color: rgb(255,255,255,0.7);
+    border-radius: 10px;
+    padding: 5px;
+}
+
 .character:hover, .characterSelected:hover{
     opacity: 0.5;
 }
 
 .characterSelected{
-    background-color: green;
+    background-color: rgba(0,128,0,0.7);
 }
 
 .characterTaken{
@@ -156,11 +163,12 @@
 
 .battleMessage{
     transform: rotate(-30deg);
-    color: red;
+    color: #ff9268;
     position: absolute;
     top: 10%;
     font-weight: bold;
     font-size: 50px;
+    font-family: "Source Code Pro", serif;
 }
 
 .opacity{

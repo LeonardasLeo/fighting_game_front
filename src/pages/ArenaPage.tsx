@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useLocation} from "react-router-dom";
 import {socket} from "../App.jsx";
 import Fighter from "../components/Fighter";
@@ -7,7 +7,13 @@ import {useDispatch, useSelector} from "react-redux";
 import BattleWonDisplay from "../components/BattleWonDisplay";
 import UserLeftModal from "../components/modals/userLeftModal";
 import {ReduxUsers, ReduxOtherStates, UserType, BattleUser, CriticalCaseEvent} from "../features/types";
-import {updateAttacker, updateAttackTime, updateRoomName} from "../features/otherStates";
+import {
+    updateAttackTime,
+
+    updateBattleWon,
+    updateHasUserLeft,
+    updateRoomName
+} from "../features/otherStates";
 
 const ArenaPage = () => {
     const location = useLocation()
@@ -28,6 +34,8 @@ const ArenaPage = () => {
         socket.emit('requestBattleUsers', {roomName, userOne: first, userTwo: second})
         dispatch(updateRoomName(roomName))
         socket.emit('setWhoIsAttacking', {roomName, first, second, attacker})
+        dispatch(updateHasUserLeft({state: false, message: null}))
+        dispatch(updateBattleWon({state: false, message: null}))
     },[])
 
     function attack () {
@@ -37,6 +45,7 @@ const ArenaPage = () => {
 
     function pageLeft() {
         socket.emit('pageLeft', {roomName, firstUser, secondUser})
+        dispatch(updateAttackTime(20))
     }
 
     return (
