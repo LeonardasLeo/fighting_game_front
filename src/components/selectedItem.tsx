@@ -11,7 +11,7 @@ const SelectedItem = ({item}: {item: GameItem}) => {
     const roomName: string = useSelector((state: ReduxOtherStates) => state.otherStates.roomName)
     function drinkPotion () {
         if (item.hp && user){
-            socket.emit('requestPotionDrink', {user: user, hpToAdd: item.hp, roomName})
+            socket.emit('requestPotionDrink', {user: user, item, roomName})
         }
     }
 

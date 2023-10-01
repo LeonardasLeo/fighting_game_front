@@ -5,7 +5,9 @@ import {useNavigate} from "react-router-dom";
 import '../App.css'
 import CharacterSelect from "../components/CharacterSelect.jsx";
 import {Character} from "../features/types";
+import config from '../config'
 const RegisterPage = () => {
+    const serverRoute = config.serverRoute
     const nav = useNavigate()
     const usernameRef:React.MutableRefObject<HTMLInputElement> = useRef()
     const password:React.MutableRefObject<HTMLInputElement> = useRef()
@@ -14,7 +16,7 @@ const RegisterPage = () => {
     const [characters, setCharacters] = useState<Character[]>([])
     const [error, setError] = useState<string>('')
     useEffect(() => {
-        fetch('http://192.168.1.147:3001/getCharacters')
+        fetch(`${serverRoute}/getCharacters`)
             .then(res => res.json())
             .then(data => setCharacters(data.data))
     }, [])
@@ -32,7 +34,7 @@ const RegisterPage = () => {
             },
             body: JSON.stringify(user)
         }
-        const response = await fetch('http://192.168.1.147:3001/register', options)
+        const response = await fetch(`${serverRoute}/register`, options)
         const data = await response.json()
         if (!data.error) nav('/login')
         else setError(data.message)

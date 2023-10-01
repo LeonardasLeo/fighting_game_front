@@ -5,8 +5,10 @@ import {useDispatch} from "react-redux";
 import {updateUser} from "../features/users";
 import {updateError} from "../features/error";
 import {GameItem} from "../features/types";
+import config from "../config";
 
-const InventorySlot = ({item, index} : {item: GameItem, index: number}) => {
+const InventorySlot = ({item} : {item: GameItem}) => {
+    const serverRoute = config.serverRoute
     const dispatch = useDispatch()
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
     const token: string = localStorage.getItem('token') ? localStorage.getItem('token') : sessionStorage.getItem('token')
@@ -19,7 +21,7 @@ const InventorySlot = ({item, index} : {item: GameItem, index: number}) => {
             },
             body: JSON.stringify(item)
         }
-        const response = await fetch('http://192.168.1.147:3001/selectItem', options)
+        const response = await fetch(`${serverRoute}/selectItem`, options)
         const data = await response.json()
         if (!data.error){
             dispatch(updateUser(data.data))
@@ -36,7 +38,7 @@ const InventorySlot = ({item, index} : {item: GameItem, index: number}) => {
                 authorization: token
             }
         }
-        const response = await fetch(`http://192.168.1.147:3001/deleteItemFromInventory/${id}`, options)
+        const response = await fetch(`${serverRoute}/deleteItemFromInventory/${id}`, options)
         const data = await response.json()
         if (!data.error){
             dispatch(updateUser(data.data))

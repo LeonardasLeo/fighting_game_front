@@ -16,8 +16,9 @@ import {updateInvitationModal, updateBattleWon, updateHasUserLeft} from "./featu
 import {useDispatch} from "react-redux";
 import {store} from "./main.jsx";
 import {BattleCommunicationData, BattleUser, InvitationReceived, OnlineUser, UserType} from "./features/types";
+import config from "./config";
 
-export const socket = io('http://192.168.1.147:3001', {
+export const socket = io(`${config.serverRoute}`, {
     autoConnect: true
 })
 function App() {
@@ -47,7 +48,7 @@ function App() {
             nav('/arena', {state: {roomName, first, second}})
         })
         socket.on('getBattleUsers', ({first, second}: BattleCommunicationData) => {
-            const user = store.getState().users.myUser
+            const user:UserType = store.getState().users.myUser
             if (first.username === user.username){
                 dispatch(updateBattleUserOne({...first, health: 100, gold: 0}))
                 dispatch(updateBattleUserTwo({...second, health: 100, gold: 0}))
@@ -57,7 +58,7 @@ function App() {
             }
         })
         socket.on('attack', (val: BattleCommunicationData) => {
-            const user = store.getState().users.myUser
+            const user: UserType = store.getState().users.myUser
             if (val.first.username === user.username){
                 dispatch(updateBattleUserOne(val.first))
                 dispatch(updateBattleUserTwo(val.second))
@@ -67,7 +68,12 @@ function App() {
             }
         })
         socket.on('drinkPotion', (val: BattleUser) => {
-            dispatch(updateBattleUserOne(val))
+            const user: UserType = store.getState().users.myUser
+            if (val.username === user.username){
+                dispatch(updateBattleUserOne(val))
+            }else{
+                dispatch(updateBattleUserTwo(val))
+            }
         })
         socket.on('battleWon', (data: BattleCommunicationData) => {
             dispatch(updateBattleUserOne(data.first))

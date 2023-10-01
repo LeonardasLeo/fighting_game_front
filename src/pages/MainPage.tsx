@@ -12,6 +12,7 @@ import Inventory from "../components/Inventory.jsx";
 import {socket} from "../App.jsx";
 import DefaultGenerationDisplay from "../components/DefaultGenerationDisplay.jsx";
 import InvitationModal from "../components/modals/InvitationModal.jsx";
+import config from "../config";
 import '../App.css'
 import {
     DefaultGeneration,
@@ -23,6 +24,7 @@ import {
 
 
 const MainPage = () => {
+    const serverRoute = config.serverRoute
     const nav = useNavigate()
     const dispatch = useDispatch()
     const user: UserType = useSelector((state: ReduxUsers) => state.users.myUser)
@@ -54,7 +56,7 @@ const MainPage = () => {
                 authorization: token
             }
         }
-        fetch(`http://192.168.1.147:3001/generateItems/${user.money}`, options)
+        fetch(`${serverRoute}/generateItems/${user.money}`, options)
             .then(res => res.json())
             .then(data => {
                 if (!data.error){

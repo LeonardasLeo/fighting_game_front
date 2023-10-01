@@ -2,8 +2,10 @@ import * as React from "react";
 import {useRef, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import config from "../config";
 
 const LoginPage = () => {
+    const serverRoute = config.serverRoute
     const nav = useNavigate()
     const usernameRef:React.MutableRefObject<HTMLInputElement>= useRef()
     const passwordRef:React.MutableRefObject<HTMLInputElement>= useRef()
@@ -21,7 +23,7 @@ const LoginPage = () => {
             },
             body: JSON.stringify(user)
         }
-        const response = await fetch('http://192.168.1.147:3001/login', options)
+        const response = await fetch(`${serverRoute}/login`, options)
         const data = await response.json()
 
         if (!data.error){
