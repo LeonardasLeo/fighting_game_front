@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import {socket} from "../App.jsx";
 import Fighter from "../components/Fighter";
@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import BattleWonDisplay from "../components/BattleWonDisplay";
 import UserLeftModal from "../components/modals/userLeftModal";
 import {ReduxUsers, ReduxOtherStates, UserType, BattleUser, CriticalCaseEvent} from "../features/types";
-import {updateAttacker, updateRoomName} from "../features/otherStates";
+import {updateAttacker, updateAttackTime, updateRoomName} from "../features/otherStates";
 
 const ArenaPage = () => {
     const location = useLocation()
@@ -19,6 +19,7 @@ const ArenaPage = () => {
     const isBattleWon: CriticalCaseEvent = useSelector((state: ReduxOtherStates) => state.otherStates.isBattleWon)
     const hasUserLeft: CriticalCaseEvent = useSelector((state: ReduxOtherStates) => state.otherStates.hasUserLeft)
     const attacker: string = useSelector((state: ReduxOtherStates) => state.otherStates.attacker)
+    const attackTime: number = useSelector((state: ReduxOtherStates) => state.otherStates.attackTime)
     //this doesnt work on FireFox
     window.onbeforeunload = pageLeft
     window.onpopstate = pageLeft
@@ -26,18 +27,12 @@ const ArenaPage = () => {
     useEffect(() => {
         socket.emit('requestBattleUsers', {roomName, userOne: first, userTwo: second})
         dispatch(updateRoomName(roomName))
-        dispatch(updateAttacker(first))
         socket.emit('setWhoIsAttacking', {roomName, first, second, attacker})
-
-        // setInterval(() => {
-        //     socket.emit('setWhoIsAttacking', {roomName, first, second, attacker})
-        // }, 20000)
     },[])
 
     function attack () {
         socket.emit('setWhoIsAttacking', {roomName, first, second, attacker})
         socket.emit('requestAttack', {roomName, firstUser, secondUser})
-        console.log(attacker)
     }
 
     function pageLeft() {
@@ -55,7 +50,18 @@ const ArenaPage = () => {
                             <BattleWonDisplay isBattleWon={isBattleWon} firstUser={firstUser}/>
                             :
                             <div className='d-flex align-items-center'>
-                                {attacker === socket.id ? <button className='btn btn-warning' onClick={attack}>Attack</button> : <div>enemy turn</div>}
+                                {attacker === socket.id
+                                    ?
+                                    <div className='d-flex flex-column align-items-center'>
+                                        <button className='btn btn-warning btn-lg' onClick={attack}>Attack!</button>
+                                        <div className='mt-3'>You have {attackTime} secs left!</div>
+                                    </div>
+                                    :
+                                    <div className='d-flex flex-column align-items-center'>
+                                        <div><b>Waiting for opponent to attack</b></div>
+                                        <div>{attackTime}</div>
+                                    </div>
+                                }
                             </div>
                         }
                         {firstUser.username === user.username ? <Fighter user={secondUser}/> : <Fighter user={firstUser}/>}

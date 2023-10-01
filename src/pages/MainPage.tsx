@@ -21,6 +21,8 @@ import {
     ReduxOtherStates,
     ReduxUsers, UserType
 } from "../features/types";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCoins} from "@fortawesome/free-solid-svg-icons";
 
 
 const MainPage = () => {
@@ -72,14 +74,14 @@ const MainPage = () => {
             {user && <div>
                 {invitationModal.state && <InvitationModal data={invitationModal.data}/>}
                 <div className={invitationModal.state ? 'p-3 opacity' : 'p-3'}>
-                    <nav className='d-flex justify-content-between align-items-center'>
-                        <div><b>Money:</b> {user.money}$</div>
+                    <nav className='d-flex justify-content-between align-items-center fs-5'>
+                        <div><FontAwesomeIcon icon={faCoins} color='#DAA451FF' /> {user.money}</div>
                         <div className='fs-3' style={{color: 'red'}}><b>{error}</b></div>
-                        <div className='d-flex align-items-center gap-3'>
+                        <div className='d-flex align-items-center gap-5'>
                             <div>
                                 <b>Logged in as:</b> {user.username}
                             </div>
-                            <button className='btn btn-dark' onClick={logout}>Log out</button>
+                            <button className='btn btn-secondary' onClick={logout}>Log out</button>
                         </div>
                     </nav>
                     <div className='d-flex gap-3 mt-3'>

@@ -12,7 +12,13 @@ import {
     updateBattleUserOne,
     updateBattleUserTwo
 } from "./features/users";
-import {updateInvitationModal, updateBattleWon, updateHasUserLeft, updateAttacker} from "./features/otherStates";
+import {
+    updateInvitationModal,
+    updateBattleWon,
+    updateHasUserLeft,
+    updateAttacker,
+    updateAttackTime
+} from "./features/otherStates";
 import {useDispatch} from "react-redux";
 import {store} from "./main.jsx";
 import {BattleCommunicationData, BattleUser, InvitationReceived, OnlineUser, UserType} from "./features/types";
@@ -85,6 +91,9 @@ function App() {
         })
         socket.on('setAttacker', (val: string) => {
             dispatch(updateAttacker(val))
+        })
+        socket.on('timer', (val: number) => {
+            dispatch(updateAttackTime(val))
         })
         socket.on('error', (val: string) => {
             setIsError(true)

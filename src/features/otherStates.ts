@@ -16,7 +16,8 @@ type OtherState = {
     isBattleWon?: CriticalCaseEvent;
     hasUserLeft?: CriticalCaseEvent;
     roomName?: string,
-    attacker?: string
+    attacker?: string,
+    attackTime?: number
 }
 
 const initialState: OtherState = {
@@ -24,7 +25,8 @@ const initialState: OtherState = {
     isBattleWon: falseCriticalEvent,
     hasUserLeft: falseCriticalEvent,
     roomName: '',
-    attacker: ''
+    attacker: '',
+    attackTime: 20
 } 
 
 const otherStatesSlice = createSlice({
@@ -45,6 +47,9 @@ const otherStatesSlice = createSlice({
         },
         updateAttacker: (state, action: PayloadAction<string>) => {
             state.attacker = action.payload
+        },
+        updateAttackTime: (state, action: PayloadAction<number>) => {
+            state.attackTime = action.payload
         }
     }
 })
@@ -54,7 +59,8 @@ export const {
     updateBattleWon,
     updateHasUserLeft,
     updateRoomName,
-    updateAttacker
+    updateAttacker,
+    updateAttackTime
 } = otherStatesSlice.actions
 
 export default otherStatesSlice.reducer

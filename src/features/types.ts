@@ -95,7 +95,8 @@ export type ReduxOtherStates = {
         isBattleWon: {state: boolean, message: string},
         hasUserLeft: {state: boolean, message: string},
         roomName: string,
-        attacker: string
+        attacker: string,
+        attackTime: number
     }
 }
 
