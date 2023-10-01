@@ -3,9 +3,9 @@ import '../../App.css'
 import WeaponModal from "./WeaponModal";
 import ArmourModal from "./ArmourModal";
 import PotionModal from "./PotionModal";
-import {gameItem} from "../../features/types";
+import {GameItem} from "../../features/types";
 
-const MoreItemInfoModal = ({item}: {item: gameItem}) => {
+const MoreItemInfoModal = ({item}: {item: GameItem}) => {
     return (
         <div>
             {item.type === 'weapon' ? <WeaponModal item={item}/>

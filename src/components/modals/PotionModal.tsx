@@ -1,11 +1,12 @@
 import * as React from "react";
 import {useRef} from 'react';
 import useOverflowCheck from "../../hooks/useOverflowCheck.js";
-import {gameItem} from "../../features/types";
+import {GameItem} from "../../features/types";
 
-const PotionModal = ({item}: {item: gameItem}) => {
-    const element = useRef()
-    const isOverflowing = useOverflowCheck(element)
+const PotionModal = ({item}: {item: GameItem}) => {
+    const element: React.MutableRefObject<HTMLDivElement> = useRef()
+    const isOverflowing: boolean= useOverflowCheck(element)
+
     return (
         <div ref={element} className={`backgroundSettings ${isOverflowing ? 'overflowingItemInfoModal' : 'itemInfoModal'}`} style={{backgroundImage: `url(${item.background})`}}>
             <div>

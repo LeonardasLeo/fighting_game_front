@@ -1,32 +1,46 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {userType, onlineUser, battleUserPayload, battleUser} from "./types.ts";
+import {UserType, OnlineUser, BattleUser} from "./types.ts";
+
+type userState = {
+    myUser?: UserType;
+    onlineUsers: OnlineUser[];
+    userInBattleOne?: BattleUser;
+    userInBattleTwo?: BattleUser;
+}
+
+const initialState: userState = {
+    myUser: undefined,
+    onlineUsers: [],
+    userInBattleOne: undefined,
+    userInBattleTwo: undefined
+}
 
 const usersSlice = createSlice({
+
     name: 'usersSlice',
-    initialState: {
-        myUser: {},
-        onlineUsers: [] as Array<onlineUser>,
-        userInBattleOne: {} as battleUser,
-        userInBattleTwo: {} as battleUser
-    },
+    initialState,
     reducers: {
-        updateUser: (state, action: PayloadAction<userType>) => {
+        updateUser: (state, action: PayloadAction<UserType>) => {
             state.myUser = action.payload
         },
-        updateOnlineUsers: (state, action: PayloadAction<onlineUser[]>) => {
+        updateOnlineUsers: (state, action: PayloadAction<OnlineUser[]>) => {
             state.onlineUsers = action.payload
         },
-        updateBattleUsers: (state, action: PayloadAction<battleUserPayload>) => {
-            state.userInBattleOne = action.payload.first
-            state.userInBattleTwo = action.payload.second
-        }
+        updateBattleUserOne: (state, action: PayloadAction<BattleUser>) => {
+            state.userInBattleOne = action.payload
+        },
+        updateBattleUserTwo: (state, action: PayloadAction<BattleUser>) => {
+            state.userInBattleTwo = action.payload
+        },
+
     }
 })
 
 export const {
     updateUser,
     updateOnlineUsers,
-    updateBattleUsers
+    updateBattleUserOne,
+    updateBattleUserTwo
 } = usersSlice.actions
 
 export default usersSlice.reducer

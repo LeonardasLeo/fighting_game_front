@@ -6,11 +6,16 @@ import MainPage from "./pages/MainPage.jsx";
 import {useEffect} from "react";
 import { io } from 'socket.io-client';
 import ArenaPage from "./pages/ArenaPage.jsx";
-import {updateOnlineUsers, updateBattleUsers, updateUser} from "./features/users";
+import {
+    updateOnlineUsers,
+    updateUser,
+    updateBattleUserOne,
+    updateBattleUserTwo
+} from "./features/users";
 import {updateInvitationModal, updateBattleWon, updateHasUserLeft} from "./features/otherStates";
 import {useDispatch} from "react-redux";
 import {store} from "./main.jsx";
-import {battleCommunicationData, invitationReceived, onlineUser, userType} from "./features/types";
+import {BattleCommunicationData, BattleUser, InvitationReceived, OnlineUser, UserType} from "./features/types";
 
 export const socket = io('http://192.168.1.147:3001', {
     autoConnect: true
@@ -18,46 +23,53 @@ export const socket = io('http://192.168.1.147:3001', {
 function App() {
     const dispatch = useDispatch()
     const nav = useNavigate()
+    const isJwtToken = localStorage.getItem('token')|| sessionStorage.getItem('token')
+
     useEffect(() => {
-        const isJwtToken = localStorage.getItem('token')|| sessionStorage.getItem('token')
         if (isJwtToken){
             nav('/main')
         }else{
             nav('/login')
         }
-        socket.on('getUserData', (val: userType) => {
+        socket.on('getUserData', (val: UserType) => {
             dispatch(updateUser(val))
         })
-        socket.on('getOnlineUsers', (val: onlineUser[]) =>{
+        socket.on('getOnlineUsers', (val: OnlineUser[]) =>{
             dispatch(updateOnlineUsers(val))
         })
-        socket.on('invitationReceived', (val: invitationReceived) => {
+        socket.on('invitationReceived', (val: InvitationReceived) => {
             dispatch(updateInvitationModal({state: true, data: val}))
         })
         socket.on('invitationAcceptedServer', ({roomName, first, second}) => {
             socket.emit('joinRoom', {roomName, id: socket.id})
             nav('/arena', {state: {roomName, first, second}})
         })
-        socket.on('getBattleUsers', ({first, second}: battleCommunicationData) => {
-            // @ts-ignore
+        socket.on('getBattleUsers', ({first, second}: BattleCommunicationData) => {
             const user = store.getState().users.myUser
             if (first.username === user.username){
-                dispatch(updateBattleUsers({first: {...first, health: 100, gold: 0}, second: {...second, health: 100, gold: 0}}))
+                dispatch(updateBattleUserOne({...first, health: 100, gold: 0}))
+                dispatch(updateBattleUserTwo({...second, health: 100, gold: 0}))
             }else{
-                dispatch(updateBattleUsers({first: {...second, health: 100, gold: 0}, second: {...first, health: 100, gold: 0}}))
+                dispatch(updateBattleUserOne({...second, health: 100, gold: 0}))
+                dispatch(updateBattleUserTwo({...first, health: 100, gold: 0}))
             }
         })
-        socket.on('attack', (val: battleCommunicationData) => {
-            // @ts-ignore
+        socket.on('attack', (val: BattleCommunicationData) => {
             const user = store.getState().users.myUser
             if (val.first.username === user.username){
-                dispatch(updateBattleUsers({first: val.first, second: val.second}))
+                dispatch(updateBattleUserOne(val.first))
+                dispatch(updateBattleUserTwo(val.second))
             }else{
-                dispatch(updateBattleUsers({first: val.second, second: val.first}))
+                dispatch(updateBattleUserOne(val.second))
+                dispatch(updateBattleUserTwo(val.first))
             }
         })
-        socket.on('battleWon', (data: battleCommunicationData) => {
-            dispatch(updateBattleUsers({first: data.first, second: data.second}))
+        socket.on('drinkPotion', (val: BattleUser) => {
+            dispatch(updateBattleUserOne(val))
+        })
+        socket.on('battleWon', (data: BattleCommunicationData) => {
+            dispatch(updateBattleUserOne(data.first))
+            dispatch(updateBattleUserTwo(data.second))
             dispatch(updateBattleWon({state: true, message: data.message}))
         })
         socket.on('pageWasReloaded', (val: string) => {

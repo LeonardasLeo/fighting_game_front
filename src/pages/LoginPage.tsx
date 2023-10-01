@@ -1,5 +1,5 @@
-// @ts-ignore
-import React, {useRef, useState} from 'react';
+import * as React from "react";
+import {useRef, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -8,6 +8,7 @@ const LoginPage = () => {
     const usernameRef:React.MutableRefObject<HTMLInputElement>= useRef()
     const passwordRef:React.MutableRefObject<HTMLInputElement>= useRef()
     const [autoLogin, setAutoLogin] = useState(false)
+
     async function login () {
         const user = {
             username: usernameRef.current.value,

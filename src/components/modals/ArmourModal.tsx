@@ -1,9 +1,9 @@
 import * as React from "react";
 import {useRef} from 'react';
 import useOverflowCheck from "../../hooks/useOverflowCheck.js";
-import {gameItem} from "../../features/types";
+import {GameItem} from "../../features/types";
 
-const ArmourModal = ({item}: {item: gameItem}) => {
+const ArmourModal = ({item}: {item: GameItem}) => {
     const element = useRef()
     const isOverflowing = useOverflowCheck(element)
     return (

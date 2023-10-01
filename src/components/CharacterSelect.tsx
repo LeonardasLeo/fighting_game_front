@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {character} from "../features/types";
+import {Character} from "../features/types";
 
 type props = {
-    item: character,
+    item: Character,
     character: string,
     setCharacter: React.Dispatch<React.SetStateAction<string>>
 }

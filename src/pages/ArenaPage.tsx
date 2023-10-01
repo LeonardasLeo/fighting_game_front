@@ -1,33 +1,37 @@
-// @ts-ignore
-import React, {useEffect} from 'react';
+import * as React from 'react';
+import {useEffect} from 'react';
 import {useLocation} from "react-router-dom";
 import {socket} from "../App.jsx";
-import Fighter from "../components/Fighter.jsx";
-import {useSelector} from "react-redux";
-import BattleWonDisplay from "../components/BattleWonDisplay.jsx";
-import UserLeftModal from "../components/modals/userLeftModal.jsx";
-import {reduxUsers, reduxOtherStates, userType, battleUser, criticalCaseEvent} from "../features/types";
+import Fighter from "../components/Fighter";
+import {useDispatch, useSelector} from "react-redux";
+import BattleWonDisplay from "../components/BattleWonDisplay";
+import UserLeftModal from "../components/modals/userLeftModal";
+import {ReduxUsers, ReduxOtherStates, UserType, BattleUser, CriticalCaseEvent} from "../features/types";
+import {updateRoomName} from "../features/otherStates";
 
 const ArenaPage = () => {
     const location = useLocation()
+    const dispatch = useDispatch()
     const {roomName, first, second} = location.state
-    const user: userType = useSelector((state: reduxUsers) => state.users.myUser)
-    const firstUser: battleUser = useSelector((state: reduxUsers) => state.users.userInBattleOne)
-    const secondUser: battleUser = useSelector((state: reduxUsers) => state.users.userInBattleTwo)
-    const isBattleWon: criticalCaseEvent = useSelector((state: reduxOtherStates) => state.otherStates.isBattleWon)
-    const hasUserLeft: criticalCaseEvent = useSelector((state: reduxOtherStates) => state.otherStates.hasUserLeft)
+    const user: UserType = useSelector((state: ReduxUsers) => state.users.myUser)
+    const firstUser: BattleUser = useSelector((state: ReduxUsers) => state.users.userInBattleOne)
+    const secondUser: BattleUser = useSelector((state: ReduxUsers) => state.users.userInBattleTwo)
+    const isBattleWon: CriticalCaseEvent = useSelector((state: ReduxOtherStates) => state.otherStates.isBattleWon)
+    const hasUserLeft: CriticalCaseEvent = useSelector((state: ReduxOtherStates) => state.otherStates.hasUserLeft)
     //this doesnt work on FireFox
-    window.onunload = pageReloaded
+    window.onbeforeunload = pageLeft
+    window.onpopstate = pageLeft
 
     useEffect(() => {
-        socket.emit('requestBattleUsers', {roomName, first, second})
+        socket.emit('requestBattleUsers', {roomName, userOne: first, userTwo: second})
+        dispatch(updateRoomName(roomName))
     },[])
 
     function attack () {
         socket.emit('requestAttack', {roomName, firstUser, secondUser})
     }
 
-    function pageReloaded() {
+    function pageLeft() {
         socket.emit('pageReloaded', {roomName, firstUser, secondUser})
     }
 

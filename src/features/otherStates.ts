@@ -1,22 +1,45 @@
-import { createSlice } from '@reduxjs/toolkit';
-import {invitationReceived} from "./types.ts";
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {CriticalCaseEvent, InvitationData} from "./types.ts";
+
+const falseState:InvitationData = {
+    state: false,
+    data: undefined
+}
+
+const falseCriticalEvent: CriticalCaseEvent = {
+    state: false,
+    message: undefined
+}
+
+type OtherState = {
+    invitationModal?: InvitationData;
+    isBattleWon?: CriticalCaseEvent;
+    hasUserLeft?: CriticalCaseEvent;
+    roomName?: string
+}
+
+const initialState: OtherState = {
+    invitationModal: falseState,
+    isBattleWon: falseCriticalEvent,
+    hasUserLeft: falseCriticalEvent,
+    roomName: ''
+} 
 
 const otherStatesSlice = createSlice({
     name: 'otherStatesSlice',
-    initialState: {
-        invitationModal: {state: false, data: {} as invitationReceived},
-        isBattleWon: {state: false, message: '' as string},
-        hasUserLeft: {state: false, message: '' as string}
-    },
+    initialState,
     reducers: {
-        updateInvitationModal: (state, action) => {
+        updateInvitationModal: (state, action: PayloadAction<InvitationData>) => {
             state.invitationModal = action.payload
         },
-        updateBattleWon: (state, action) => {
+        updateBattleWon: (state, action: PayloadAction<CriticalCaseEvent>) => {
             state.isBattleWon = action.payload
         },
-        updateHasUserLeft: (state, action) => {
+        updateHasUserLeft: (state, action: PayloadAction<CriticalCaseEvent>) => {
             state.hasUserLeft = action.payload
+        },
+        updateRoomName: (state, action: PayloadAction<string>) => {
+            state.roomName = action.payload
         }
     }
 })
@@ -24,7 +47,8 @@ const otherStatesSlice = createSlice({
 export const {
     updateInvitationModal,
     updateBattleWon,
-    updateHasUserLeft
+    updateHasUserLeft,
+    updateRoomName
 } = otherStatesSlice.actions
 
 export default otherStatesSlice.reducer

@@ -1,13 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+type ErrorState = {
+    error?: string
+}
+
+const initialState: ErrorState = {
+    error: undefined
+}
+
 const errorSlice = createSlice({
     name: 'errorSlice',
-    initialState: {
-        homeScreenError: ''
-    },
+    initialState,
     reducers: {
         updateError: (state, action) => {
-            state.homeScreenError = action.payload
+            state.error = action.payload
         }
     }
 })

@@ -1,17 +1,17 @@
 // @ts-ignore
-import React, {useEffect, useRef, useState} from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import * as React from "react";
+import {useEffect, useRef, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import '../App.css'
 import CharacterSelect from "../components/CharacterSelect.jsx";
-import {character} from "../features/types";
+import {Character} from "../features/types";
 const RegisterPage = () => {
     const nav = useNavigate()
     const usernameRef:React.MutableRefObject<HTMLInputElement> = useRef()
     const password:React.MutableRefObject<HTMLInputElement> = useRef()
     const passwordTwo:React.MutableRefObject<HTMLInputElement> = useRef()
     const [character, setCharacter] = useState<string>('')
-    const [characters, setCharacters] = useState<character[]>([])
+    const [characters, setCharacters] = useState<Character[]>([])
     useEffect(() => {
         fetch('http://192.168.1.147:3001/getCharacters')
             .then(res => res.json())

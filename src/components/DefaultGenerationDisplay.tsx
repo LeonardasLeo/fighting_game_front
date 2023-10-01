@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {defaultGeneration} from "../features/types";
+import {DefaultGeneration} from "../features/types";
 
-const DefaultGenerationDisplay = ({item}: {item: defaultGeneration}) => {
+const DefaultGenerationDisplay = ({item}: {item: DefaultGeneration}) => {
     return (
         <div className='defaultGenerationDisplay'>
             <img src={item.image} alt=""/>

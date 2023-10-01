@@ -4,10 +4,10 @@ import '../App.css'
 import MoreItemInfoModal from "./modals/MoreItemInfoModal";
 import {useDispatch} from "react-redux";
 import {updateUser} from "../features/users";
-import {updateError} from "../features/errors";
-import {gameItem} from "../features/types";
+import {updateError} from "../features/error";
+import {GameItem} from "../features/types";
 
-const GeneratedItemsSlot = ({item}: {item: gameItem}) => {
+const GeneratedItemsSlot = ({item}: {item: GameItem}) => {
     const dispatch = useDispatch()
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
     const token: string = localStorage.getItem('token') ? localStorage.getItem('token') : sessionStorage.getItem('token')

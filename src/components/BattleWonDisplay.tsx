@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {useNavigate} from "react-router-dom";
-import {battleUser, criticalCaseEvent} from "../features/types";
+import {BattleUser, CriticalCaseEvent} from "../features/types";
 
 type props = {
-    isBattleWon: criticalCaseEvent,
-    firstUser: battleUser
+    isBattleWon: CriticalCaseEvent,
+    firstUser: BattleUser
 }
 
 const BattleWonDisplay = ({isBattleWon, firstUser}: props) => {

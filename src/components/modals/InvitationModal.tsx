@@ -4,9 +4,9 @@ import {socket} from "../../App.jsx";
 import {updateInvitationModal} from "../../features/otherStates";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {invitationReceived} from "../../features/types";
+import {InvitationReceived} from "../../features/types";
 
-const InvitationModal = ({data}: {data: invitationReceived}) => {
+const InvitationModal = ({data}: {data: InvitationReceived}) => {
     const dispatch = useDispatch()
     const nav = useNavigate()
     const userWhoSent = data.from
@@ -18,7 +18,7 @@ const InvitationModal = ({data}: {data: invitationReceived}) => {
         turnModalOff()
         socket.emit('joinRoom', {roomName: data.roomName, id: socket.id})
         socket.emit('invitationAcceptedClient', {userWhoSent, roomName: data.roomName})
-        nav('/arena', {state: {roomName: data.roomName, userOne: userWhoSent.socketId, userTwo: socket.id}})
+        nav('/arena', {state: {roomName: data.roomName, first: userWhoSent.socketId, second: socket.id}})
     }
     return (
         <div className='invitationModal'>

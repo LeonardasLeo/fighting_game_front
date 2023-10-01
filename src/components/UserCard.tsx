@@ -3,12 +3,12 @@ import React from 'react';
 import '../App.css'
 import {socket} from "../App.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import {updateError} from '../features/errors';
-import {onlineUser, reduxUsers, userType} from "../features/types";
+import {updateError} from '../features/error';
+import {OnlineUser, ReduxUsers, UserType} from "../features/types";
 
-const UserCard = ({user}: {user: onlineUser}) => {
+const UserCard = ({user}: {user: OnlineUser}) => {
     const dispatch = useDispatch()
-    const myUser: userType = useSelector((state: reduxUsers) => state.users.myUser)
+    const myUser: UserType = useSelector((state: ReduxUsers) => state.users.myUser)
     function invitePlayerToBattle (user) {
         if (myUser.selectedItems[0].tier !== undefined){
             const roomName = `${myUser.username}room`

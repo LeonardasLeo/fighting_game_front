@@ -1,4 +1,4 @@
-export type gameItem = {
+export type GameItem = {
     type: string,
     image: string,
     background: string,
@@ -9,33 +9,34 @@ export type gameItem = {
         max: number
     },
     effectsSlots?: number,
-    effects?: effectType[]
+    effects?: EffectType[]
     armourPoints?: number
-    maxGold?: number
+    maxGold?: number,
+    id: number
 }
 
-export type effectType = {
+export type EffectType = {
     name: string,
     probability: number
 }
 
-export type defaultGeneration = {
+export type DefaultGeneration = {
     image: string,
-    default: boolean
+    type: string
 }
 
 
-export type userType = {
+export type UserType = {
     username: string,
-    inventory: Array<gameItem>,
-    selectedItems: Array<gameItem>,
+    inventory: Array<GameItem>,
+    selectedItems: Array<GameItem>,
     money: number,
-    character: string
+    character: string,
 }
 
-export type battleUser = {
+export type BattleUser = {
     username: string,
-    selectedItems: Array<gameItem>,
+    selectedItems: Array<GameItem>,
     gold: number,
     money: number,
     health: number,
@@ -43,54 +44,62 @@ export type battleUser = {
     character: string
 }
 
-export type onlineUser = {
+export type OnlineUser = {
     username: string,
     status: string,
     socketId: string,
     character: string
 }
 
-export type battleUserPayload = {
-    first: battleUser,
-    second: battleUser
-}
-
-export type character = {
+export type Character = {
     image: string,
     isTaken: boolean
 }
 
-export type reduxUsers = {
+export type ReduxUsers = {
     users: {
-        myUser: userType
-        onlineUsers: Array<onlineUser>,
-        userInBattleOne: battleUser,
-        userInBattleTwo: battleUser
+        myUser: UserType
+        onlineUsers: Array<OnlineUser>,
+        userInBattleOne: BattleUser,
+        userInBattleTwo: BattleUser
     }
 }
 
-export type invitationReceived = {
-    from: onlineUser,
+export type InvitationReceived = {
+    from: OnlineUser,
     to: string,
     roomName: string
 }
 
-export type battleCommunicationData = {
+export type BattleCommunicationData = {
     roomName?: string,
-    first: battleUser,
-    second: battleUser,
+    first: BattleUser,
+    second: BattleUser,
+    message?: string,
+    damage?: number
+}
+
+export type CriticalCaseEvent = {
+    state: boolean,
     message?: string
 }
 
-export type criticalCaseEvent = {
-    state: boolean,
-    message: string
+export type InvitationData = {
+    state: boolean;
+    data?: InvitationReceived
 }
 
-export type reduxOtherStates = {
+export type ReduxOtherStates = {
     otherStates: {
-        invitationModal: {state: boolean, data: invitationReceived},
+        invitationModal: {state: boolean, data: InvitationReceived},
         isBattleWon: {state: boolean, message: string},
-        hasUserLeft: {state: boolean, message: string}
+        hasUserLeft: {state: boolean, message: string},
+        roomName: string
+    }
+}
+
+export type ReduxErrorStates = {
+    errors: {
+        error?: string
     }
 }

@@ -147,12 +147,21 @@
     border-radius: 10px;
 }
 
-.invitationActive{
+.battleMessage{
+    transform: rotate(-30deg);
+    color: red;
+    position: absolute;
+    top: 10%;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.opacity{
     opacity: 0.5;
 }
 
 .battleSide{
-
+    position: relative;
 }
 .battleSide > img{
     height: 500px;
