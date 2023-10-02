@@ -18,7 +18,7 @@ const UserCard = ({user}: {user: UserTypes.OnlineUser}) => {
         }
     }
     return (
-        <div className='userCard'>
+        <div className='user-card'>
             <img src={user.character} alt=""/>
             <div className='d-flex flex-column justify-content-between'>
                 <b>{user.username}</b>

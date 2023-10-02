@@ -8,7 +8,7 @@ const PotionModal = ({item}: {item: GameTypes.GameItem}) => {
     const isOverflowing: boolean= useOverflowCheck(element)
 
     return (
-        <div ref={element} className={`backgroundSettings ${isOverflowing ? 'overflowingItemInfoModal' : 'itemInfoModal'}`} style={{backgroundImage: `url(${item.background})`}}>
+        <div ref={element} className={`background-settings ${isOverflowing ? 'overflowing-item-info-modal' : 'item-info-modal'}`} style={{backgroundImage: `url(${item.background})`}}>
             <div>
                 <b>Restores:</b> {item.hp} HP
             </div>

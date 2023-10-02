@@ -10,7 +10,7 @@ import '../App.css'
 
 
 const GeneratedItemsSlot = ({item}: {item: GameTypes.GameItem}) => {
-    const serverRoute = config.serverRoute
+    const serverRoute: string = config.serverRoute
     const dispatch = useDispatch()
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
     const token: string = localStorage.getItem('token') ? localStorage.getItem('token') : sessionStorage.getItem('token')
@@ -32,14 +32,20 @@ const GeneratedItemsSlot = ({item}: {item: GameTypes.GameItem}) => {
         }
     }
     return (
-        <div className='generatedItemsSlot backgroundSettings' style={{backgroundImage: `url(${item.background})`}}
-             onMouseEnter={() => setIsModalVisible(true)}
-             onMouseLeave={() => setIsModalVisible(false)}>
-            {isModalVisible && item.image && <MoreItemInfoModal item={item}/>}
-            <img src={item.image} alt=""/>
-            <button className='btn btn-primary' onClick={() => takeItem(item)}>Take</button>
+        <div style={{position: 'relative'}}>
+            <div className='generated-items-slot background-settings' style={{backgroundImage: `url(${item.background})`}}
+                 onMouseEnter={() => setIsModalVisible(true)}
+                 onMouseLeave={() => setIsModalVisible(false)}
+                 onClick={() => takeItem(item)}>
+                <div className='d-flex justify-content-center fw-bold text-dark'>Click to take!</div>
+                <div>
+                    <img src={item.image} alt=""/>
+                </div>
+            </div>
+            {isModalVisible && <MoreItemInfoModal item={item}/>}
         </div>
-    );
+
+);
 };
 
 export default GeneratedItemsSlot;

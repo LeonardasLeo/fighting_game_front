@@ -26,7 +26,7 @@ const ArenaPage = () => {
     const isBattleWon: DataTypes.CriticalCaseEvent = useSelector((state: ReduxTypes.ReduxOtherStates) => state.otherStates.isBattleWon)
     const hasUserLeft: DataTypes.CriticalCaseEvent = useSelector((state: ReduxTypes.ReduxOtherStates) => state.otherStates.hasUserLeft)
     const attacker: string = useSelector((state: ReduxTypes.ReduxOtherStates) => state.otherStates.attacker)
-    //this doesnt work on FireFox
+
     window.onbeforeunload = pageLeft
     window.onpopstate = pageLeft
 

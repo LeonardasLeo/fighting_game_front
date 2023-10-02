@@ -1,4 +1,4 @@
-.character, .characterSelected, .characterTaken{
+.character, .character-selected, .character-taken{
     border: 2px ridge;
     border-radius: 10px;
     width: 200px;
@@ -18,29 +18,33 @@ input{
     padding: 5px;
 }
 
-.character:hover, .characterSelected:hover{
+.character:hover, .character-selected:hover{
     opacity: 0.5;
 }
 
-.characterSelected{
+.character-selected{
     background-color: rgba(0,128,0,0.7);
 }
 
-.characterTaken{
+.character-taken{
     cursor: unset;
     img{
         opacity: 0.2;
     }
 }
 
-.userList{
+.w-700{
+    width: 700px;
+}
+
+.user-list{
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.userCard{
-    background-color: rgba(208, 208, 208, 0.5);
+.user-card{
+    background-color: rgba(208, 208, 208, 0.2);
     border-radius: 10px;
     height: 100px;
     display: flex;
@@ -51,35 +55,41 @@ input{
     }
 }
 
-.defaultGenerationDisplay{
+.default-generation-display{
     height: 200px;
     img{
         height: 100%;
     }
 }
 
-.backgroundSettings{
+.background-settings{
     background-size: cover;
     background-position: bottom;
 }
 
-.generatedItemsSlot{
+.generated-items-slot{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     padding: 10px;
     height: 200px;
+    width: 200px;
+    border: 2px ridge;
     border-radius: 10px;
-    flex: 1;
     position: relative;
     cursor: pointer;
-    img{
-        height: 70%;
-        object-fit: contain;
+    div{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        img{
+            height: 60%;
+            object-fit: contain;
+        }
     }
 }
 
-.itemInfoModal, .overflowingItemInfoModal{
+.item-info-modal, .overflowing-item-info-modal{
     border-radius: 10px;
     padding: 10px;
     width: 100%;
@@ -89,14 +99,15 @@ input{
     z-index: 1;
 }
 
-.itemInfoModal{
+.item-info-modal{
     top: 105%;
     background-size: 1000px;
     background-position: bottom;
     border: 2px ridge;
+    color: black;
 }
 
-.overflowingItemInfoModal{
+.overflowing-item-info-modal{
     bottom: 105%;
     background-size: 1000px;
     background-position: top;
@@ -104,7 +115,7 @@ input{
 }
 
 
-.inventorySlot{
+.inventory-slot{
     height: 100px;
     width: 100px;
     border-radius: 10px;
@@ -119,7 +130,7 @@ input{
     }
 }
 
-.selectedItem{
+.selected-item{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -137,7 +148,7 @@ input{
     }
 }
 
-.deleteFromInventoryButton{
+.delete-from-inventory-button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -145,23 +156,24 @@ input{
     position: absolute;
     width: 20px;
     height: 20px;
-    top: -10px;
-    right: -10px;
+    top: -8px;
+    right: -8px;
     border-radius: 100%;
+    font-size: 17px;
 }
 
-.invitationModal{
+.invitation-modal{
     position: absolute;
     top: 40%;
     background-color: #c7c7c7;
     padding: 20px;
     z-index: 1;
     color: black;
-    left: 40%;
+    left: 44%;
     border-radius: 10px;
 }
 
-.battleMessage{
+.battle-message{
     transform: rotate(-30deg);
     color: #ff9268;
     position: absolute;
@@ -175,10 +187,10 @@ input{
     opacity: 0.5;
 }
 
-.battleSide{
+.battle-side{
     position: relative;
 }
-.battleSide > img{
+.battle-side > img{
     height: 500px;
     width: 100%;
     object-fit: contain;
@@ -193,11 +205,27 @@ input{
     overflow: hidden;
 }
 
-.healthBar{
+.health-bar{
     width: 100%;
     height: 50px;
     background-color: limegreen;
     z-index: 1;
+}
+
+.btn-type{
+    background-color: rgba(0,0,0,0);
+    background-position: bottom;
+    background-size: cover;
+    color: white;
+    border-radius: 10px;
+    height: 40px;
+    border: none;
+}
+
+.btn-type:hover{
+    color: silver;
+    opacity: 1;
+    transition: 0.5s;
 }
 
 .flex-1{

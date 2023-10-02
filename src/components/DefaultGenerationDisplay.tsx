@@ -3,7 +3,7 @@ import {GameTypes} from "../features/types";
 
 const DefaultGenerationDisplay = ({item}: {item: GameTypes.DefaultGeneration}) => {
     return (
-        <div className='defaultGenerationDisplay'>
+        <div className='default-generation-display'>
             <img src={item.image} alt=""/>
         </div>
     );

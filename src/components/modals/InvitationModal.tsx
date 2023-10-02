@@ -20,9 +20,9 @@ const InvitationModal = ({data}: {data: DataTypes.InvitationReceived}) => {
         nav('/arena', {state: {roomName: data.roomName, first: userWhoSent.socketId, second: socket.id}})
     }
     return (
-        <div className='invitationModal'>
+        <div className='invitation-modal'>
             <div>Invitation from {userWhoSent.username} to battle</div>
-            <div className='d-flex justify-content-between mt-2'>
+            <div className='d-flex justify-content-around mt-3'>
                 <button className='btn btn-success' onClick={acceptInvitation}>Accept</button>
                 <button className='btn btn-danger' onClick={turnModalOff}>Reject</button>
             </div>

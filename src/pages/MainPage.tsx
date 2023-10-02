@@ -59,32 +59,33 @@ const MainPage = () => {
     }
     return (
         <div>
-            {user && <div>
-                {invitationModal.state && <InvitationModal data={invitationModal.data}/>}
-                <div className={invitationModal.state ? 'p-3 opacity' : 'p-3'}>
-                    <Navbar/>
-                    <div className='d-flex gap-3 mt-3'>
-                        <div className='d-flex flex-column flex-1'>
-                            <div className='flex-1 d-flex flex-column'>
-                                <div className='d-flex justify-content-between gap-3'>
-                                    {generatedItems.map((item: GameTypes.GameItem | GameTypes.DefaultGeneration, index) =>
-                                        item.type === 'default'
-                                            ? <DefaultGenerationDisplay key={index} item={item as GameTypes.DefaultGeneration}/>
-                                            : <GeneratedItemsSlot key={index} item={item as GameTypes.GameItem}/>
-                                    )}
+            {user &&
+                <div>
+                    {invitationModal.state && <InvitationModal data={invitationModal.data}/>}
+                        <div className={invitationModal.state ? 'p-3 opacity' : 'p-3'}>
+                            <Navbar/>
+                            <div className='d-flex gap-3 mt-3'>
+                                <div className='d-flex flex-column flex-1'>
+                                    <div className='flex-1 d-flex flex-column align-items-center '>
+                                        <div className='d-flex justify-content-between gap-3 w-700'>
+                                            {generatedItems.map((item: GameTypes.GameItem | GameTypes.DefaultGeneration, index) =>
+                                                item.type === 'default'
+                                                    ? <DefaultGenerationDisplay key={index} item={item as GameTypes.DefaultGeneration}/>
+                                                    : <GeneratedItemsSlot key={index} item={item as GameTypes.GameItem}/>
+                                            )}
+                                        </div>
+                                        <button className='btn btn-warning btn-lg mt-3' onClick={generateItems}>Generate: 100<FontAwesomeIcon icon={faCoins} color='black' /></button>
+                                    </div>
+                                    <div className='d-flex justify-content-center mt-3'>
+                                        <Inventory/>
+                                    </div>
                                 </div>
-                                <button className='btn btn-warning btn-lg mt-3' onClick={generateItems}>Generate: 100<FontAwesomeIcon icon={faCoins} color='black' /></button>
-                            </div>
-                            <div className='flex-1 mt-3'>
-                                <Inventory/>
-                            </div>
+                                <div className='user-list flex-1'>
+                                    {onlineUsers !== undefined && onlineUsers.map((user: UserTypes.OnlineUser) => <UserCard key={user.username} user={user}/>)}
+                                </div>
+                             </div>
                         </div>
-                        <div className='userList flex-1'>
-                            {onlineUsers !== undefined && onlineUsers.map((user: UserTypes.OnlineUser) => <UserCard key={user.username} user={user}/>)}
-                        </div>
-                    </div>
-                </div>
-            </div>}
+                </div>}
         </div>
     );
 };

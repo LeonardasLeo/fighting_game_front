@@ -9,8 +9,8 @@ type props = {
 
 const CharacterSelect = ({item, character, setCharacter}: props) => {
     function checkIsCharacterTaken (item){
-        if (item.isTaken) return 'characterTaken'
-        if (character === item.image && !item.isTaken) return 'characterSelected'
+        if (item.isTaken) return 'character-taken'
+        if (character === item.image && !item.isTaken) return 'character-selected'
         return 'character'
     }
     return (

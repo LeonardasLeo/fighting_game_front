@@ -48,7 +48,7 @@ const InventorySlot = ({item} : {item: GameTypes.GameItem}) => {
     }
     return (
         <div style={{position: 'relative'}}>
-            <div className='inventorySlot backgroundSettings'
+            <div className='inventory-slot background-settings'
                  style={{backgroundImage: `url(${item.background})`}}
                  onClick={() => selectItem(item)}
                  onMouseEnter={() => setIsModalVisible(true)}
@@ -57,7 +57,7 @@ const InventorySlot = ({item} : {item: GameTypes.GameItem}) => {
                 {isModalVisible && item.image && <MoreItemInfoModal item={item}/>}
                 <img src={item.image} alt=""/>
             </div>
-            {item && <div className='deleteFromInventoryButton' onClick={() => deleteFromInventory(item.id)}>❌</div>}
+            {item && <div className='delete-from-inventory-button' onClick={() => deleteFromInventory(item.id)}>❌</div>}
         </div>
     );
 };

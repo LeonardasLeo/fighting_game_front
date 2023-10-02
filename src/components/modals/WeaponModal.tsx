@@ -8,7 +8,7 @@ const WeaponModal = ({item}: {item: GameTypes.GameItem}) => {
     const isOverflowing: boolean = useOverflowCheck(ref)
 
     return (
-        <div ref={ref} className={`backgroundSettings ${isOverflowing ? 'overflowingItemInfoModal' : 'itemInfoModal'}`} style={{backgroundImage: `url(${item.background})`}}>
+        <div ref={ref} className={`background-settings ${isOverflowing ? 'overflowing-item-info-modal' : 'item-info-modal'}`} style={{backgroundImage: `url(${item.background})`}}>
             <div><b>Tier</b>: {item.tier}</div>
             <div>
                 <b>Damage</b>:

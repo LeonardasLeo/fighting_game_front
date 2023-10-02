@@ -17,9 +17,9 @@ const SelectedItem = ({item}: {item: GameTypes.GameItem}) => {
     }
 
     return (
-        <div className='selectedItem backgroundSettings'  style={{backgroundImage: `url(${item.background})`}}
-            onMouseEnter={() => setIsModalVisible(true)}
-            onMouseLeave={() => setIsModalVisible(false)}
+        <div className='selected-item background-settings' style={{backgroundImage: `url(${item.background})`}}
+             onMouseEnter={() => setIsModalVisible(true)}
+             onMouseLeave={() => setIsModalVisible(false)}
              onClick={() => {item.type === 'potion' && drinkPotion()}}
         >
             {isModalVisible && item.image && <MoreItemInfoModal item={item}/> }
