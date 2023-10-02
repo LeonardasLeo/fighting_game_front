@@ -64,19 +64,19 @@ const MainPage = () => {
                     {invitationModal.state && <InvitationModal data={invitationModal.data}/>}
                         <div className={invitationModal.state ? 'p-3 opacity' : 'p-3'}>
                             <Navbar/>
-                            <div className='d-flex gap-3 mt-3'>
+                            <div className='d-flex gap-3 mt-3  flex-lg-row flex-column-reverse'>
                                 <div className='d-flex flex-column flex-1'>
-                                    <div className='flex-1 d-flex flex-column align-items-center '>
-                                        <div className='d-flex justify-content-between gap-3 w-700'>
+                                    <div className='flex-1 d-flex flex-column'>
+                                        <div className='d-flex justify-content-around gap-3'>
                                             {generatedItems.map((item: GameTypes.GameItem | GameTypes.DefaultGeneration, index) =>
                                                 item.type === 'default'
                                                     ? <DefaultGenerationDisplay key={index} item={item as GameTypes.DefaultGeneration}/>
                                                     : <GeneratedItemsSlot key={index} item={item as GameTypes.GameItem}/>
                                             )}
                                         </div>
-                                        <button className='btn btn-warning btn-lg mt-3' onClick={generateItems}>Generate: 100<FontAwesomeIcon icon={faCoins} color='black' /></button>
+                                            <button className='btn btn-warning btn-lg mt-3' onClick={generateItems}>Generate: 100<FontAwesomeIcon icon={faCoins} color='black' /></button>
                                     </div>
-                                    <div className='d-flex justify-content-center mt-3'>
+                                    <div className='flex-1 d-flex mt-3'>
                                         <Inventory/>
                                     </div>
                                 </div>

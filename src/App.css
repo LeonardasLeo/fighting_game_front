@@ -56,7 +56,7 @@ input {
 }
 
 .default-generation-display {
-  height: 200px;
+  height: 120px;
 }
 .default-generation-display img {
   height: 100%;
@@ -70,10 +70,11 @@ input {
 .generated-items-slot {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   padding: 10px;
-  height: 200px;
-  width: 200px;
+  height: 120px;
+  width: 120px;
+  font-size: 13px;
   border: 2px ridge;
   border-radius: 10px;
   position: relative;
@@ -230,6 +231,36 @@ input {
 
 .flex-1 {
   flex: 1;
+}
+
+@media (min-width: 1199.98px) {
+  .default-generation-display-lg {
+    height: 200px;
+  }
+  .default-generation-display-lg img {
+    height: 100%;
+  }
+  .generated-items-slot-lg {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    height: 200px;
+    width: 200px;
+    border: 2px ridge;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+  }
+  .generated-items-slot-lg div {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .generated-items-slot-lg div img {
+    height: 60%;
+    object-fit: contain;
+  }
 }
 
 /*# sourceMappingURL=App.css.map */

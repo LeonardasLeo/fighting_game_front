@@ -1,5 +1,5 @@
 const config = {
-    serverRoute: 'http://localhost:3001'
+    serverRoute: 'http://192.168.1.147:3001'
 }
 
 export default config

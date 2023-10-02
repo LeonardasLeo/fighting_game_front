@@ -16,10 +16,10 @@ const Navbar = () => {
         nav('/login')
     }
     return (
-        <nav className='d-flex justify-content-between align-items-center fs-5'>
+        <nav className='d-flex flex-lg-row flex-column-reverse justify-content-between align-items-lg-center fs-5'>
             <div><FontAwesomeIcon icon={faCoins} color='#DAA451FF' /> {user.money}</div>
             <div className='fs-3' style={{color: 'red'}}><b>{error}</b></div>
-            <div className='d-flex align-items-center gap-5'>
+            <div className='d-flex align-items-center justify-content-between gap-5'>
                 <div>
                     <b>Logged in as:</b> {user.username}
                 </div>

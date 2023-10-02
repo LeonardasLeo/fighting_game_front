@@ -33,7 +33,7 @@ const GeneratedItemsSlot = ({item}: {item: GameTypes.GameItem}) => {
     }
     return (
         <div style={{position: 'relative'}}>
-            <div className='generated-items-slot background-settings' style={{backgroundImage: `url(${item.background})`}}
+            <div className='generated-items-slot-lg generated-items-slot background-settings' style={{backgroundImage: `url(${item.background})`}}
                  onMouseEnter={() => setIsModalVisible(true)}
                  onMouseLeave={() => setIsModalVisible(false)}
                  onClick={() => takeItem(item)}>
